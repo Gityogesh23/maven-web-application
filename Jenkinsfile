@@ -1,5 +1,6 @@
 pipeline {
     agent any
+
     stages {
         stage('Source Code Management') {
             steps {
@@ -7,18 +8,19 @@ pipeline {
                     url: 'https://github.com/ashishsutar31/maven-web-application.git'
             }
         }
+
         stage('Build with Maven') {
             steps {
                 sh 'mvn clean package'
             }
         }
+
         stage('Build Docker Image') {
             steps {
-                stage('Build Docker Image') {
-    steps {
-        sh 'docker build -t ashish-maven-web-app --build-arg JAR_FILE=target/maven-web-application.war .'
+                sh 'docker build -t ashish-maven-web-app --build-arg JAR_FILE=target/maven-web-application.war .'
             }
         }
+
         stage('Run Docker Container') {
             steps {
                 sh '''
