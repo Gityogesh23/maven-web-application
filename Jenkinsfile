@@ -14,7 +14,9 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t ashish-maven-web-app .'
+                stage('Build Docker Image') {
+    steps {
+        sh 'docker build -t ashish-maven-web-app --build-arg JAR_FILE=target/maven-web-application.war .'
             }
         }
         stage('Run Docker Container') {
