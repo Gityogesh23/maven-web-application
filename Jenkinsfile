@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        NAME= "tomcat"
+        NAME = "tomcat"
         DOCKER_IMAGE = "ashish-tomcat-app"
         DOCKER_CONTAINER = "ashish-container-01"
     stages {
