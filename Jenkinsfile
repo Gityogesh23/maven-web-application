@@ -1,12 +1,7 @@
 pipeline {
     agent any
-
-    environment {
-        NAME = "tomcat"
-        DOCKER_IMAGE = "ashish-tomcat-app"
-        DOCKER_CONTAINER = "ashish-container-01"
     stages {
-        stage('Checkout Code') {
+        stage('Source Code Management') {
             steps {
                 git branch: 'master',
                     url: 'https://github.com/ashishsutar31/maven-web-application.git'
@@ -19,16 +14,15 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t ashish-tomcat-app .'
+                sh 'docker build -t ashish-maven-web-app .'
             }
         }
-        stage('Deploy Docker Container') {
+        stage('Run Docker Container') {
             steps {
                 sh '''
-                docker rm -f $ashish-container-01 || true
-                docker run --name ashish-container-01 -d -p 8081:8080 ashish-tomcat-app
+                docker rm -f ashish-maven-web-container-01 || true
+                docker run --name ashish-maven-web-container-01 -d -p 8081:8080 ashish-maven-web-app
                 '''
-  
             }
         }
     }
