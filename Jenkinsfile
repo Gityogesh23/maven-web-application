@@ -25,7 +25,7 @@ pipeline {
             steps {
                 sh '''
                 docker rm -f ashish-maven-web-container-01 || true
-                docker run --name ashish-maven-web-container-01 -d -p 8081:8080 ashish-maven-web-app
+                docker run --name ashish-maven-web-container-01 -d -p 9090:8080 ashish-maven-web-app
                 '''
             }
         }
