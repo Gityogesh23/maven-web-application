@@ -40,10 +40,10 @@ pipeline {
             steps {
                 sh '''
                 # Remove the container if it already exists (|| true prevents job failure if it doesn't exist)
-                docker rm -f yogesh-cont01 || true
+                docker rm -f yogesh-maven-cont01 || true
 
                 # Run the new container in detached mode (-d), mapping host port 8081 to container port 8080
-                docker run --name yogesh-cont01 -d -p 8081:8080 yogesh-tomcat-web-app
+                docker run --name yogesh-maven-cont01 -d -p 8081:8080 yogesh-tomcat-web-app
                 '''
             }
         }
