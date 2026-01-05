@@ -1,1 +1,2 @@
+push this content to check webhook triggered or not.
 this is the file ,created to check whether the pipeline is triggered or not.i.e build start or not on jenkins -->on remote ec2 server.
