@@ -26,26 +26,26 @@ pipeline {
         }
 
         // --- Stage 3: Build Docker Image ---
-        stage('Build Docker Image') {
-            steps {
-                // Build the Docker image using the Dockerfile in the current directory (.),
-                // passing the generated WAR file as a build argument.
-                // NOTE: This requires the Jenkins user to have permission to access the Docker daemon socket.
-                sh 'docker build -t yogesh-tomcat-web-app --build-arg JAR_FILE=target/maven-web-application.war .'
-            }
-        }
+        // stage('Build Docker Image') {
+        //     steps {
+        //         // Build the Docker image using the Dockerfile in the current directory (.),
+        //         // passing the generated WAR file as a build argument.
+        //         // NOTE: This requires the Jenkins user to have permission to access the Docker daemon socket.
+        //         sh 'docker build -t yogesh-tomcat-web-app --build-arg JAR_FILE=target/maven-web-application.war .'
+        //     }
+        // }
 
-        // --- Stage 4: Deploy and Run Container ---
-        stage('Run Docker Container') {
-            steps {
-                sh '''
-                # Remove the container if it already exists (|| true prevents job failure if it doesn't exist)
-                docker rm -f yogesh-maven-cont01 || true
+        // // --- Stage 4: Deploy and Run Container ---
+        // stage('Run Docker Container') {
+        //     steps {
+        //         sh '''
+        //         # Remove the container if it already exists (|| true prevents job failure if it doesn't exist)
+        //         docker rm -f yogesh-maven-cont01 || true
 
-                # Run the new container in detached mode (-d), mapping host port 8081 to container port 8080
-                docker run --name yogesh-maven-cont01 -d -p 8081:8080 yogesh-tomcat-web-app
-                '''
-            }
-        }
+        //         # Run the new container in detached mode (-d), mapping host port 8081 to container port 8080
+        //         docker run --name yogesh-maven-cont01 -d -p 8081:8080 yogesh-tomcat-web-app
+        //         '''
+        //     }
+        // }
     }
 }
