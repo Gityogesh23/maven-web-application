@@ -1,4 +1,4 @@
-
+3rd time-->After configuring a GitHub webhook, any push event triggers Jenkins automatically, so committing a change is required to validate the setup.
 push this content to check webhook triggered or not.-->webHook trigered pipeline successfully -1st time.
 this is the file ,created to check whether the pipeline is triggered or not.i.e build start or not on jenkins -->on remote ec2 server-->failure
 -->to triggered coz not adding--> Correct Jenkins Webhook Endpoint at github repo-->setting-->webhooks-->
