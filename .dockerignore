@@ -1,0 +1,10 @@
+target/
+.git/
+.gitignore
+.classpath
+.project
+.settings/
+.idea/
+*.iml
+node_modules/
+README.md
