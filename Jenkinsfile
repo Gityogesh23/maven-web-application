@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_CREDS = credentials('dockerhub-creds')
         IMAGE_NAME = "yogeshpatil23/maven-web-app"
         IMAGE_TAG = "v${BUILD_NUMBER}"
     }
@@ -27,16 +26,18 @@ pipeline {
                 sh "trivy image -q --severity HIGH,CRITICAL --ignore-unfixed --ignorefile .trivyignore --exit-code 1 ${IMAGE_NAME}:${IMAGE_TAG}"
             }
         }
-
-        stage('Docker Login & Push') {
+     stage('Docker Login & Push') {
             steps {
                 script {
-                    sh 'echo "$DOCKERHUB_CREDS_PSW" | docker login -u "$DOCKERHUB_CREDS_USR" --password-stdin'
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', 
+                                                     usernameVariable: 'DOCKER_USER', 
+                                                     passwordVariable: 'DOCKER_PASS')]) {
+                        sh 'echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin'
+                    }
                     sh "docker push ${IMAGE_NAME}:${IMAGE_TAG}"
                     sh "docker push ${IMAGE_NAME}:latest"
                 }
             }
-        }
     }
 }
 
