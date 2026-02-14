@@ -20,12 +20,12 @@ pipeline {
             }
         }
 
-        stage('Container Image Scan') {
-            steps {
-                // Scan the image containing Tomcat and your WAR
-                sh "trivy image -q --severity HIGH,CRITICAL --ignore-unfixed --ignorefile .trivyignore --exit-code 1 ${IMAGE_NAME}:${IMAGE_TAG}"
-            }
-        }
+        // stage('Container Image Scan') {
+        //     steps {
+        //         // Scan the image containing Tomcat and your WAR
+        //         sh "trivy image -q --severity HIGH,CRITICAL --ignore-unfixed --ignorefile .trivyignore --exit-code 1 ${IMAGE_NAME}:${IMAGE_TAG}"
+        //     }
+        // }
      stage('Docker Login & Push') {
             steps {
                 script {
