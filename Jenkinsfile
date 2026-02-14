@@ -51,7 +51,7 @@ pipeline {
 
     stages {
 
-        // --- Stage 1: Source Code Checkout ---
+        // - Stage 1: Source Code Checkout -
         stage('Source Code Management') {
             steps {
                 // Check out the code from the specified Git repository and branch
@@ -60,7 +60,7 @@ pipeline {
             }
         }
 
-         // --- Stage 2: Build and Package the Application ---
+         // --- Stage 2: Build and Package the Application -
         stage('Build with Maven') {
             steps {
                 // Execute Maven to clean up previous builds and create the WAR package
@@ -68,7 +68,7 @@ pipeline {
             }
         }
 
-        --- Stage 3: Build Docker Image ---
+        - Stage 3: Build Docker Image -
         stage('Build Docker Image') {
             steps {
                 // Build the Docker image using the Dockerfile in the current directory (.),
@@ -78,7 +78,7 @@ pipeline {
             }
         }
 
-        // --- Stage 4: Deploy and Run Container ---
+        // --- Stage 4: Deploy and Run Container -
         stage('Run Docker Container') {
             steps {
                 sh '''
