@@ -7,7 +7,7 @@ COPY src ./src
 RUN mvn clean package
 
 # Stage 2: Run using official Tomcat image
-FROM tomcat:9-jdk8-openjdk-slim
+FROM tomcat:9.0.115-jdk8-temurin
 # Remove default Tomcat apps to secure the server
 RUN rm -rf /usr/local/tomcat/webapps/*
 # Copy the built .war file from stage 1 to the webapps directory
