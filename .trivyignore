@@ -1,0 +1,4 @@
+# Documentation: Ignore CVE-2024-XXXX because it is not exploitable in our app
+CVE-2024-XXXX
+# Documentation: Ignore CVE-2023-YYYY until a patch is released
+CVE-2023-YYYY
