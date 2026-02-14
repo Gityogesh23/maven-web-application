@@ -38,9 +38,9 @@ pipeline {
                     sh "docker push ${IMAGE_NAME}:latest"
                 }
             }
-    }
+      }
+   }
 }
-
 /*
 This Jenkinsfile defines a standard CI/CD process for a Java Maven web application,
 including compilation, packaging, Docker image creation, and container deployment.
