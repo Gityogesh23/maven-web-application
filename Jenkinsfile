@@ -1,5 +1,48 @@
-// This Jenkinsfile defines a standard CI/CD process for a Java Maven web application,
-// including compilation, packaging, Docker image creation, and container deployment.
+pipeline {
+    agent any
+
+    environment {
+        DOCKERHUB_CREDS = credentials('dockerhub-creds')
+        IMAGE_NAME = "yogeshpatil23/maven-web-app"
+        IMAGE_TAG = "v${BUILD_NUMBER}"
+    }
+
+    stages {
+        stage("Git Checkout") {
+            steps {
+                git branch: 'master',
+                    url: 'https://github.com/Gityogesh23/maven-web-application.git'
+            }
+        }
+
+        stage('Docker Build & Package') {
+            steps {
+                sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
+            }
+        }
+
+        stage('Container Image Scan') {
+            steps {
+                // Scan the image containing Tomcat and your WAR
+                sh "trivy image --severity HIGH,CRITICAL --exit-code 1 ${IMAGE_NAME}:${IMAGE_TAG}"
+            }
+        }
+
+        stage('Docker Login & Push') {
+            steps {
+                script {
+                    sh 'echo "$DOCKERHUB_CREDS_PSW" | docker login -u "$DOCKERHUB_CREDS_USR" --password-stdin'
+                    sh "docker push ${IMAGE_NAME}:${IMAGE_TAG}"
+                    sh "docker push ${IMAGE_NAME}:latest"
+                }
+            }
+        }
+    }
+}
+
+/*
+This Jenkinsfile defines a standard CI/CD process for a Java Maven web application,
+including compilation, packaging, Docker image creation, and container deployment.
 
 pipeline {
 
@@ -17,14 +60,14 @@ pipeline {
             }
         }
 
-        // --- Stage 2: Build and Package the Application ---
+         // --- Stage 2: Build and Package the Application ---
         stage('Build with Maven') {
             steps {
                 // Execute Maven to clean up previous builds and create the WAR package
                 sh 'mvn clean package'
             }
         }
-/*
+
         --- Stage 3: Build Docker Image ---
         stage('Build Docker Image') {
             steps {
@@ -47,6 +90,7 @@ pipeline {
                 '''
             }
         }
-*/
+
     }
 }
+*/
