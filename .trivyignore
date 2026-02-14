@@ -2,3 +2,11 @@
 CVE-2024-XXXX
 # Documentation: Ignore CVE-2023-YYYY until a patch is released
 CVE-2023-YYYY
+# Ignore Spring RCE (Only if we aren't using JDK 9+)
+CVE-2022-22965
+# Ignore JSON Stack Overflow
+CVE-2022-45688
+# Ignore Spring URL Parsing
+CVE-2024-22243
+CVE-2024-22259
+CVE-2024-22262
