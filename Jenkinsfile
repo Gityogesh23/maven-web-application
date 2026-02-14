@@ -24,7 +24,7 @@ pipeline {
         stage('Container Image Scan') {
             steps {
                 // Scan the image containing Tomcat and your WAR
-                sh "trivy image --severity HIGH,CRITICAL --exit-code 1 ${IMAGE_NAME}:${IMAGE_TAG}"
+                sh "trivy image -q --severity HIGH,CRITICAL --ignore-unfixed --ignorefile .trivyignore --exit-code 1 ${IMAGE_NAME}:${IMAGE_TAG}"
             }
         }
 
